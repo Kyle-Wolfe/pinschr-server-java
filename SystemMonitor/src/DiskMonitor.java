@@ -12,9 +12,8 @@ public class DiskMonitor extends DiskGraph
         FileSystem[] fslist = sigar.getFileSystemList();
         FileSystemMap mounts = sigar.getFileSystemMap();
         FileSystemUsage fsUsage = new FileSystemUsage();
-        
-        for (int i = 0; i < fslist.length; i++) {
-            FileSystem fs = fslist[i];
+
+        for (FileSystem fs : fslist) {
             if (fs.getType() == fs.TYPE_LOCAL_DISK) {
                 System.out.println(fs.getDevName());
                 fsUsage.gather(sigar, fs.getDevName());
@@ -29,4 +28,8 @@ public class DiskMonitor extends DiskGraph
     }
     
     public void update() {}
+
+    public void drawLabel(Graphics2D g2) {
+
+    }
 }

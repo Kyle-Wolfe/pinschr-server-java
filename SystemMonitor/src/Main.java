@@ -10,8 +10,9 @@ public class Main extends JPanel
     
     public static final String TITLE = "System Monitor";
     
-    MemoryMonitor mem = new MemoryMonitor(5, 5, 150);
-    DriveBayMonitor drives = new DriveBayMonitor();
+    MemoryMonitor mem = new MemoryMonitor(5, 5, 100);
+    //DriveBayMonitor drives = new DriveBayMonitor();
+
     
     
     
