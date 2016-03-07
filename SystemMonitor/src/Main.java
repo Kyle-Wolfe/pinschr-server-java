@@ -1,3 +1,5 @@
+import org.hyperic.sigar.Sigar;
+
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,8 +11,10 @@ public class Main extends JPanel
     public static final int CANVAS_HEIGHT = 600;
     
     public static final String TITLE = "System Monitor";
-    
-    MemoryMonitor mem = new MemoryMonitor(5, 5, 100);
+
+    Sigar sigar = new Sigar();
+    MemoryMonitor mem = new MemoryMonitor(sigar, 5, 5, 100);
+    DiskMonitor disk = new DiskMonitor(sigar, 5, 300, 100);
     //DriveBayMonitor drives = new DriveBayMonitor();
 
     
@@ -20,7 +24,7 @@ public class Main extends JPanel
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         mem.draw(g2);
-        
+        disk.draw(g2);
     }
     
     

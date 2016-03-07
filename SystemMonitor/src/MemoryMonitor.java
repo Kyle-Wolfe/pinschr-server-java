@@ -7,9 +7,9 @@ public class MemoryMonitor extends CircularGraph {
     private Sigar sigar;
     private Mem mem;
 
-    public MemoryMonitor(double x, double y, double radius) {
+    public MemoryMonitor(Sigar sigar, double x, double y, double radius) {
         super(x, y, radius);
-        sigar = new Sigar();
+        this.sigar = sigar;
         mem = new Mem();
     }
 
