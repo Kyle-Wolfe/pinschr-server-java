@@ -16,8 +16,6 @@ public class Main extends JPanel
     MemoryMonitor mem = new MemoryMonitor(sigar, 5, 5, 100);
     DiskMonitor disk = new DiskMonitor(sigar, 5, 300, 100);
     //DriveBayMonitor drives = new DriveBayMonitor();
-
-    
     
     
     public void paintComponent(Graphics g) {
