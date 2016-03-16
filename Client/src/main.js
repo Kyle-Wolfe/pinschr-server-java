@@ -1,6 +1,6 @@
 
 var context1 = document.getElementById("memory").getContext("2d");
-var context2 = document.getElementById("graph2").getContext("2d");
+var context2 = document.getElementById("gpu_memory").getContext("2d");
 var context3 = document.getElementById("graph3").getContext("2d");
 
 var options = {
@@ -9,11 +9,26 @@ var options = {
     showTooltips: false
 };
 
-var chartData = [
+var memoryChartData = [
     {
         value:0,
-        color: "#FF0000",
-        highlight: "#FF0000",
+        color: "#0000FF",
+        highlight: "#0000FF",
+        label: "Used"
+    },
+    {
+        value:1,
+        color: "#FFFFFF",
+        highlight: "#FFFFFF",
+        label: "Free"
+    }
+];
+
+var gpuMemoryChartData = [
+    {
+        value:0,
+        color: "#006400",
+        highlight: "#006400",
         label: "Used"
     },
     {
@@ -25,8 +40,8 @@ var chartData = [
 ];
 
 var memoryChart = new Chart(context1);
-new Chart(context2).Doughnut(chartData, options);
-new Chart(context3).Doughnut(chartData, options);
+var gpuMemoryChart = new Chart(context2)
+//new Chart(context3).Doughnut(memoryChartData, options);
 
 
 
@@ -49,9 +64,15 @@ setInterval(
 
 function update(data) {
     var json = JSON.parse(data);
-    chartData[0]['value'] = json['memory']['used'];
-    chartData[1]['value'] = json['memory']['free'];
-    memoryChart.Doughnut(chartData,options);
+
+    //memoryChartData[0]['value'] = json['memory']['used'];
+    //memoryChartData[1]['value'] = json['memory']['free'];
+    memoryChart.Doughnut(memoryChartData, options);
+
+    gpuMemoryChartData[0]['value'] = json['gpu']['memory.used'];
+    gpuMemoryChartData[1]['value'] = json['gpu']['memory.free'];
+    console.log(json);
+    gpuMemoryChart.Doughnut(gpuMemoryChartData, options);
 }
 
 function print() {
