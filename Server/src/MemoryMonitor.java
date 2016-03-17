@@ -3,7 +3,7 @@ import org.hyperic.sigar.Mem;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
-public class MemoryMonitor{
+public class MemoryMonitor implements Monitorable {
     @Expose private long memoryFree;
     @Expose private long memoryUsed;
     private Sigar sigar;
@@ -12,22 +12,18 @@ public class MemoryMonitor{
     public MemoryMonitor(Sigar sigar) {
         this.sigar = sigar;
         this.mem = new Mem();
+        update();
     }
 
-    private void update() {
+    public void update() {
         try {
             mem.gather(sigar);
         }
         catch (SigarException e) {
             e.printStackTrace();
         }
-    }
 
-    private long getFree() {
-        return mem.getActualFree();
-    }
-
-    private long getUsed() {
-        return mem.getActualUsed();
+        this.memoryUsed = mem.getActualUsed();
+        this.memoryFree = mem.getActualFree();
     }
 }

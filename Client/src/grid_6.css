@@ -33,6 +33,8 @@ body {
 
     padding: 15px;
     position: relative;
+    height: inherit;
+
 }
 
 .one-sixth {

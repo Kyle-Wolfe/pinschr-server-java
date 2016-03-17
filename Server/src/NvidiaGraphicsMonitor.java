@@ -7,7 +7,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 
-public class NvidiaGraphicsMonitor implements Jsonable {
+public class NvidiaGraphicsMonitor implements Monitorable {
     @Expose private int count;
     @Expose private String name;
     @Expose private double fanSpeed;
@@ -31,6 +31,7 @@ public class NvidiaGraphicsMonitor implements Jsonable {
         }
         String[] data = parse(output);
 
+        System.out.println(Integer.parseInt(data[3]));
         // Assign the data to the object's fields
         this.count = Integer.parseInt(data[0]);
         this.name = data[1];

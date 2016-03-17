@@ -15,6 +15,7 @@ import javax.websocket.server.ServerEndpoint;
  */
 @ServerEndpoint("/echo")
 public class WebsocketServer {
+    SystemMonitor system = new SystemMonitor();
     /**
      * @OnOpen allows us to intercept the creation of a new session.
      * The session class allows us to send data to the user.
@@ -33,11 +34,8 @@ public class WebsocketServer {
     @OnMessage
     public void onMessage(String message, Session session){
         System.out.println("Message from " + session.getId() + ": " + message);
+        system.update();
         try {
-            if (message.equals("init")) {
-                // Send hostname and other static information
-            }
-            SystemMonitor system = new SystemMonitor();
             session.getBasicRemote().sendText(system.toString());
         } catch (IOException ex) {
             ex.printStackTrace();
