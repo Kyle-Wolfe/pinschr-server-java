@@ -14,7 +14,7 @@ public class NvidiaGraphicsMonitor implements Monitorable {
     @Expose private int memoryUsed;
     @Expose private int memoryFree;
     @Expose private int temperature;
-    @Expose private int powerDraw;
+    @Expose private double powerDraw;
 
     public NvidiaGraphicsMonitor() {
         update();
@@ -31,7 +31,6 @@ public class NvidiaGraphicsMonitor implements Monitorable {
         }
         String[] data = parse(output);
 
-        System.out.println(Integer.parseInt(data[3]));
         // Assign the data to the object's fields
         this.count = Integer.parseInt(data[0]);
         this.name = data[1];
@@ -39,7 +38,7 @@ public class NvidiaGraphicsMonitor implements Monitorable {
         this.memoryUsed = Integer.parseInt(data[3]);
         this.memoryFree = Integer.parseInt(data[4]);
         this.temperature = Integer.parseInt(data[5]);
-        this.powerDraw = Integer.parseInt(data[6]);
+        this.powerDraw = Double.parseDouble(data[6]);
     }
 
     private static String[] parse(String raw) {

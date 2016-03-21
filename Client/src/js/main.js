@@ -43,9 +43,7 @@ var memoryChart = new Chart(context1);
 var gpuMemoryChart = new Chart(context2);
 //new Chart(context3).Doughnut(memoryChartData, options);
 
-
-
-var ws = new WebSocket("ws://localhost:8080/server/echo");
+var ws = new WebSocket("ws://localhost:8080");
 
 ws.onopen = function() {
     ws.send("init");
