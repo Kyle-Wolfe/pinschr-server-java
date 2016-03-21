@@ -12,30 +12,40 @@
 
     <div class="row">
         <div class="one-third">
-            <canvas id="memory" class="graph"></canvas>
+            <div class="object" id="memory">
+            </div>
             <h3>Memory</h3>
         </div>
         <div class="one-third">
-            <canvas id="2" class="graph"></canvas>
+            <div class="object">
+            </div>
             <h3>?</h3>
         </div>
         <div class="one-third">
-            <canvas id="3" class="graph"></canvas>
+            <div class="object">
+                <canvas id="3" class="graph"></canvas>
+            </div>
             <h3>?</h3>
         </div>
     </div>
 
     <div class="row">
         <div class="one-third">
-            <canvas id="gpu_memory" class="graph"></canvas>
+            <div class="object">
+                <canvas id="gpu_memory" class="graph"></canvas>
+            </div>
             <h3>Graphics Memory</h3>
         </div>
         <div class="one-third">
-            <canvas id="5" class="graph"></canvas>
+            <div class="object">
+                <canvas id="5" class="graph"></canvas>
+            </div>
             <h3>GPU Temperature (C)</h3>
         </div>
         <div class="one-third">
-            <img id="gpufan" src="img/fan.svg">
+            <div class="object">
+                <img id="gpufan" src="img/fan.svg">
+            </div>
             <h3>GPU Fan Speed</h3>
         </div>
     </div>
@@ -43,7 +53,7 @@
 
 
 
-    <script src="js/Chart.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- https://github.com/nnnick/Chart.js (MIT) -->
     <script src="js/main.js"></script>
 </body>

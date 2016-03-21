@@ -1,75 +1,22 @@
-
-var context1 = document.getElementById("memory").getContext("2d");
-var context2 = document.getElementById("gpu_memory").getContext("2d");
-//var context3 = document.getElementById("graph3").getContext("2d");
-
-var options = {
-    responsive: true,
-    animation: false,
-    showTooltips: false
-};
-
-var memoryChartData = [
-    {
-        value:0,
-        color: "#0000FF",
-        highlight: "#0000FF",
-        label: "Used"
-    },
-    {
-        value:1,
-        color: "#FFFFFF",
-        highlight: "#FFFFFF",
-        label: "Free"
-    }
-];
-
-var gpuMemoryChartData = [
-    {
-        value:0,
-        color: "#006400",
-        highlight: "#006400",
-        label: "Used"
-    },
-    {
-        value:1,
-        color: "#FFFFFF",
-        highlight: "#FFFFFF",
-        label: "Free"
-    }
-];
-
-var memoryChart = new Chart(context1);
-var gpuMemoryChart = new Chart(context2);
-//new Chart(context3).Doughnut(memoryChartData, options);
-
+var json;
 var ws = new WebSocket("ws://localhost:8080");
-
 ws.onopen = function() {
     ws.send("init");
 };
-ws.onmessage = function(evt) {
-    update(evt.data);
+ws.onmessage = function (evt) {
+    json = JSON.parse(evt.data);
 };
-
-
 setInterval(
     function() {
         ws.send("");
+        update();
     }
     ,500
 );
+/* */
+/* Connected to server */
+/* */
 
-
-function update(data) {
-    var json = JSON.parse(data);
-
-    memoryChartData[0]['value'] = json['memory']['memoryUsed'];
-    memoryChartData[1]['value'] = json['memory']['memoryFree'];
-    memoryChart.Doughnut(memoryChartData, options);
-
-    gpuMemoryChartData[0]['value'] = json['gpu']['memoryUsed'];
-    gpuMemoryChartData[1]['value'] = json['gpu']['memoryFree'];
-    console.log(json);
-    gpuMemoryChart.Doughnut(gpuMemoryChartData, options);
+function update() {
+    document.getElementById('jsonDiv').innerHTML = JSON.stringify(json, null, 2);
 }

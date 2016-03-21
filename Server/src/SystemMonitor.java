@@ -27,6 +27,10 @@ public class SystemMonitor {
         }
     }
 
+    public void printPretty() {
+        Gson prettyGson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+        System.out.println(prettyGson.toJson(this.monitors));
+    }
     
     public String toString() {
         return gson.toJson(this.monitors);
