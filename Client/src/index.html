@@ -4,57 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hostname - Properties</title>
+    <link rel="stylesheet" href="css/chartist.min.css">
     <link rel="stylesheet" href="css/grid_6.css">
     <!-- https://github.com/joncoop/grid-6 (MIT) -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+    <div>
+        <input value="Connect" onclick="connect()" type="button">
+        <input value="Disconnect" onclick="disconnect()" type="button">
+        <span id="status"></span>
+    </div>
+
     <div class="row">
+
         <div class="one-third">
-            <div class="object" id="memory">
+            <div class="object">
+                <div id="memory" class="ct-chart ct-square"></div>
             </div>
             <h3>Memory</h3>
         </div>
+
         <div class="one-third">
             <div class="object">
+                <div id="1" class="ct-chart ct-square"></div>
             </div>
-            <h3>?</h3>
+            <h3>Memory</h3>
         </div>
+
         <div class="one-third">
             <div class="object">
-                <canvas id="3" class="graph"></canvas>
+                <div id="2" class="ct-chart ct-square"></div>
             </div>
-            <h3>?</h3>
+            <h3>Memory</h3>
         </div>
+
     </div>
 
+
     <div class="row">
+
         <div class="one-third">
             <div class="object">
-                <canvas id="gpu_memory" class="graph"></canvas>
+                <div id="gpuMem" class="ct-chart ct-square"></div>
             </div>
             <h3>Graphics Memory</h3>
         </div>
+
         <div class="one-third">
             <div class="object">
-                <canvas id="5" class="graph"></canvas>
+                <div id="gpuTemp" class="ct-chart ct-square"></div>
             </div>
             <h3>GPU Temperature (C)</h3>
         </div>
+
         <div class="one-third">
             <div class="object">
-                <img id="gpufan" src="img/fan.svg">
+                <img id="gpuFan" src="img/fan.svg">
             </div>
             <h3>GPU Fan Speed</h3>
         </div>
+
     </div>
 
 
-
-
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <!-- https://github.com/nnnick/Chart.js (MIT) -->
+    <script src="js/chartist.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

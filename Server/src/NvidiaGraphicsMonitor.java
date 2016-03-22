@@ -11,8 +11,8 @@ public class NvidiaGraphicsMonitor implements Monitorable {
     @Expose private int count;
     @Expose private String name;
     @Expose private double fanSpeed;
-    @Expose private int memoryUsed;
-    @Expose private int memoryFree;
+    @Expose private int used;
+    @Expose private int free;
     @Expose private int temperature;
     @Expose private double powerDraw;
 
@@ -35,8 +35,8 @@ public class NvidiaGraphicsMonitor implements Monitorable {
         this.count = Integer.parseInt(data[0]);
         this.name = data[1];
         this.fanSpeed = Double.parseDouble(data[2]);
-        this.memoryUsed = Integer.parseInt(data[3]);
-        this.memoryFree = Integer.parseInt(data[4]);
+        this.used = Integer.parseInt(data[3]);
+        this.free = Integer.parseInt(data[4]);
         this.temperature = Integer.parseInt(data[5]);
         this.powerDraw = Double.parseDouble(data[6]);
     }

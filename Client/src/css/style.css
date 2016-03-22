@@ -16,9 +16,9 @@ h3 {
     min-height: 20%;
 }
 
-img {
+img,.ct-chart {
     display: block;
-    margin: 0 auto;
+    margin: auto auto;
     padding: 10px;
     height: 100%;
 }
@@ -28,6 +28,35 @@ img {
     margin: auto auto;
 }
 
+.ct-series.ct-series-a {
+    stroke: black;
+}
+
 table {
     margin: auto auto !important;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#gpuFan {
+    animation-name: rotate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+input {
+    padding: 10px;
+}
+
+#status {
+    padding: 10px;
+    background-color: red;
 }

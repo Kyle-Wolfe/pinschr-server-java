@@ -26,6 +26,7 @@ public class MonitorServer extends WebSocketServer {
             String in = sysin.readLine();
             if(in.equals("stop")) {
                 server.stop();
+                break;
             }
         }
     }
@@ -42,7 +43,7 @@ public class MonitorServer extends WebSocketServer {
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        //System.out.println(conn + " has disconnected.");
+        System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " has disconnected.");
     }
 
     @Override
