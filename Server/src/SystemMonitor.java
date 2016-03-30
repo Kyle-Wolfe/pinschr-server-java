@@ -4,21 +4,18 @@ import org.hyperic.sigar.Sigar;
 import java.util.HashMap;
 
 public class SystemMonitor {
-    private Sigar sigar;
-    private MemoryMonitor memory;
-    private NvidiaGraphicsMonitor gpu;
+
     private HashMap<String, Monitorable> monitors = new HashMap<String, Monitorable>();
     private Gson gson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
     public SystemMonitor() {
-        sigar = new Sigar();
-        memory = new MemoryMonitor(this.sigar);
-        gpu = new NvidiaGraphicsMonitor();
+        Sigar sigar = new Sigar();
 
-        monitors.put("gpu", gpu);
-        monitors.put("memory", memory);
+        monitors.put("gpu", new NvidiaGraphicsMonitor());
+        monitors.put("memory", new MemoryMonitor(sigar));
+        monitors.put("os", new OSMonitor());
     }
 
     public void update() {
