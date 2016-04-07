@@ -48,7 +48,13 @@ public class OSMonitor implements Monitorable {
         }
     }
 
+    @Override
     public void update() {
         // Nothing needs to be updated since it shouldn't change
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
     }
 }

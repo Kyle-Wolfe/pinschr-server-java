@@ -15,6 +15,7 @@ public class MemoryMonitor implements Monitorable {
         update();
     }
 
+    @Override
     public void update() {
         try {
             mem.gather(sigar);
@@ -25,5 +26,10 @@ public class MemoryMonitor implements Monitorable {
 
         this.used = mem.getActualUsed();
         this.free = mem.getActualFree();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
     }
 }

@@ -1,6 +1,7 @@
 import com.google.gson.annotations.Expose;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.FileSystems;
@@ -20,6 +21,7 @@ public class NvidiaGraphicsMonitor implements Monitorable {
         update();
     }
 
+    @Override
     public void update() {
         String output = null;
         Path path = FileSystems.getDefault().getPath("C:/Program Files/NVIDIA Corporation/NVSMI", "nvidia-smi.exe");
@@ -72,5 +74,10 @@ public class NvidiaGraphicsMonitor implements Monitorable {
         input.close();
 
         return output.toString();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return new File("C:/Program Files/NVIDIA Corporation/NVSMI/nvidia-smi.exe").isFile();
     }
 }

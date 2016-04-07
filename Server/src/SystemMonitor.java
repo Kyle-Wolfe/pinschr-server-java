@@ -2,10 +2,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hyperic.sigar.Sigar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 public class SystemMonitor {
 
-    private HashMap<String, Monitorable> monitors = new HashMap<String, Monitorable>();
+    private HashMap<String, Monitorable> monitors = new LinkedHashMap<String, Monitorable>();
     private Gson gson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
@@ -13,9 +15,16 @@ public class SystemMonitor {
     public SystemMonitor() {
         Sigar sigar = new Sigar();
 
-        monitors.put("gpu", new NvidiaGraphicsMonitor());
         monitors.put("memory", new MemoryMonitor(sigar));
+        monitors.put("gpu", new NvidiaGraphicsMonitor());
         monitors.put("os", new OSMonitor());
+
+        Iterator<Monitorable> it = monitors.values().iterator();
+        while(it.hasNext()) {
+            if(!it.next().isAvailable()) {
+                it.remove();
+            }
+        }
     }
 
     public void update() {
