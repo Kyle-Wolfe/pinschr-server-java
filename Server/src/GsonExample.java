@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +15,11 @@ public class GsonExample {
 
         int count = 0;
         SystemMonitor monitor = new SystemMonitor();
-        BufferedReader sysin = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader sysIn = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Press enter to get json output");
 
         while(true) {
-            String in = sysin.readLine();
+            String in = sysIn.readLine();
             if(in.equals("exit")) {
                 System.out.println(in);
                 break;

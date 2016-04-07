@@ -18,6 +18,7 @@ public class SystemMonitor {
         monitors.put("memory", new MemoryMonitor(sigar));
         monitors.put("gpu", new NvidiaGraphicsMonitor());
         monitors.put("os", new OSMonitor());
+        monitors.put("partitions", new PartitionMonitor(sigar));
 
         Iterator<Monitorable> it = monitors.values().iterator();
         while(it.hasNext()) {
