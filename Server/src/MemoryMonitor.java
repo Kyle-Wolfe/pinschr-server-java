@@ -4,15 +4,19 @@ import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
 public class MemoryMonitor implements Monitorable {
-    @Expose private long free;
-    @Expose private long used;
+
     private Sigar sigar;
     private Mem mem;
+
+    @Expose private long free;
+    @Expose private long used;
 
     public MemoryMonitor(Sigar sigar) {
         this.sigar = sigar;
         this.mem = new Mem();
-        update();
+        if(isAvailable()) {
+            update();
+        }
     }
 
     @Override

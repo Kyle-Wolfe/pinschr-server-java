@@ -9,6 +9,7 @@ import java.nio.file.Path;
 
 
 public class NvidiaGraphicsMonitor implements Monitorable {
+
     @Expose private int count;
     @Expose private String name;
     @Expose private double fanSpeed;
@@ -18,7 +19,9 @@ public class NvidiaGraphicsMonitor implements Monitorable {
     @Expose private double powerDraw;
 
     public NvidiaGraphicsMonitor() {
-        update();
+        if(isAvailable()) {
+            update();
+        }
     }
 
     @Override
@@ -78,6 +81,6 @@ public class NvidiaGraphicsMonitor implements Monitorable {
 
     @Override
     public boolean isAvailable() {
-        return new File("C:/Program Files/NVIDIA Corporation/NVSMI/nvidia-smi.exe").isFile();
+        return new File("C:/Program Files/NVIDIA Corporation/NVSMI/nvidia-smi.exe").exists();
     }
 }

@@ -16,7 +16,7 @@ public class MonitorServer extends WebSocketServer {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         WebSocketImpl.DEBUG = false;
-        int port = 8080;
+        int port = 3000;
         MonitorServer server = new MonitorServer(port);
         server.start();
         System.out.println("Server started on port " + server.getPort());

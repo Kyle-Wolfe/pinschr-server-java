@@ -1,18 +1,21 @@
 import com.google.gson.annotations.Expose;
 import org.hyperic.sigar.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PartitionMonitor implements Monitorable {
+
     Sigar sigar;
-    FileSystem[] fsList;
-    @Expose String[] mountPoints;
-    @Expose String[] deviceNames;
-    @Expose long[] bytesFree;
-    @Expose long[] bytesUsed;
+
+    @Expose List<Partition> partitions;
 
     public PartitionMonitor(Sigar sigar) {
         this.sigar = sigar;
-        update();
+        if(isAvailable()) {
+            update();
+        }
     }
 
     public void init() {
@@ -22,21 +25,23 @@ public class PartitionMonitor implements Monitorable {
     @Override
     public void update() {
         try{
-            this.fsList = sigar.getFileSystemList();
-            int numFS = this.fsList.length;
+            FileSystem[] fsList = sigar.getFileSystemList();
+            this.partitions = new ArrayList<Partition>();
 
-            this.mountPoints = new String[numFS];
-            this.deviceNames = new String[numFS];
-            this.bytesFree = new long[numFS];
-            this.bytesUsed = new long[numFS];
+            for(int i = 0; i < fsList.length; i++) {
+                if(fsList[i].getType() == FileSystem.TYPE_LOCAL_DISK) {
+                    Partition p = new Partition();
+                    p.setMountPoint(fsList[i].getDirName());
+                    p.setDeviceName(fsList[i].getDevName());
 
-            for(int i = 0; i < numFS; i++) {
-                FileSystemUsage fsUsage = sigar.getFileSystemUsage(fsList[i].getDirName());
+                    FileSystemUsage fsUsage = sigar.getFileSystemUsage(fsList[i].getDirName());
+                    p.setBytesFree(fsUsage.getFree());
+                    p.setBytesUsed(fsUsage.getUsed());
+                    p.setReadBytes(fsUsage.getDiskReadBytes());
+                    p.setWriteBytes(fsUsage.getDiskWriteBytes());
 
-                this.bytesFree[i] = fsUsage.getFree();
-                this.bytesUsed[i] = fsUsage.getUsed();
-                this.mountPoints[i] = fsList[i].getDirName();
-                this.deviceNames[i] = fsList[i].getDevName();
+                    this.partitions.add(p);
+                }
             }
         } catch (SigarException e) {
             e.printStackTrace();

@@ -1,21 +1,19 @@
 import com.google.gson.annotations.Expose;
 
 import javax.print.DocFlavor;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 public class OSMonitor implements Monitorable {
-    @Expose
-    private String platform;
 
-    @Expose
-    private String version;
-
-    @Expose
-    private String user;
-
-    @Expose
-    private String home;
+    @Expose private String platform;
+    @Expose private String version;
+    @Expose private String user;
+    @Expose private String home;
+    @Expose private String hostname;
 
     public OSMonitor() {
         Properties properties = System.getProperties();
@@ -24,6 +22,13 @@ public class OSMonitor implements Monitorable {
         this.user = properties.getProperty("user.name");
         this.home = properties.getProperty("user.home")
                 .replace(File.separator,"/");
+
+        this.hostname = "";
+        try {
+            this.hostname = getHostname();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getPlatform(Properties properties) {
@@ -46,6 +51,17 @@ public class OSMonitor implements Monitorable {
         else {
             return "-1";
         }
+    }
+
+    private String getHostname() throws IOException {
+        String output;
+
+        Process p = Runtime.getRuntime().exec("hostname");
+        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        output = input.readLine();
+
+        input.close();
+        return output;
     }
 
     @Override
