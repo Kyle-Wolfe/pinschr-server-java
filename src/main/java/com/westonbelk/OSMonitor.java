@@ -1,6 +1,7 @@
+package com.westonbelk;
+
 import com.google.gson.annotations.Expose;
 
-import javax.print.DocFlavor;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;

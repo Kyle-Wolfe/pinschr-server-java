@@ -1,6 +1,11 @@
+package com.westonbelk;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.hyperic.sigar.Sigar;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OperatingSystem;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -13,12 +18,15 @@ public class SystemMonitor {
             .create();
 
     public SystemMonitor() {
-        Sigar sigar = new Sigar();
+        SystemInfo systemInfo = new SystemInfo();
+        HardwareAbstractionLayer hardware = systemInfo.getHardware();
+        OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
 
-        monitors.put("memory", new MemoryMonitor(sigar));
+        monitors.put("memory", new MemoryMonitor(hardware.getMemory()));
+        monitors.put("cpu", new CPUMonitor());
         monitors.put("gpu", new NvidiaGraphicsMonitor());
         monitors.put("os", new OSMonitor());
-        monitors.put("partitions", new PartitionMonitor(sigar));
+        monitors.put("partitions", new PartitionMonitor());
 
         Iterator<Monitorable> it = monitors.values().iterator();
         while(it.hasNext()) {

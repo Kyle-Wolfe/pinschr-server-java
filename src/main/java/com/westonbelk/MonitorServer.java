@@ -1,4 +1,5 @@
-import org.hyperic.sigar.Sigar;
+package com.westonbelk;
+
 import org.java_websocket.WebSocket;
 import org.java_websocket.WebSocketImpl;
 import org.java_websocket.handshake.ClientHandshake;

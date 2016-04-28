@@ -1,3 +1,5 @@
+package com.westonbelk;
+
 import com.google.gson.annotations.Expose;
 
 public class Partition {

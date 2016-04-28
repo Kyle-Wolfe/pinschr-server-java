@@ -1,18 +1,14 @@
-import com.google.gson.annotations.Expose;
-import org.hyperic.sigar.*;
+package com.westonbelk;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
 import java.util.List;
 
 
 public class PartitionMonitor implements Monitorable {
 
-    Sigar sigar;
-
     @Expose List<Partition> partitions;
 
-    public PartitionMonitor(Sigar sigar) {
-        this.sigar = sigar;
+    public PartitionMonitor() {
         if(isAvailable()) {
             update();
         }
@@ -24,6 +20,7 @@ public class PartitionMonitor implements Monitorable {
 
     @Override
     public void update() {
+        /*
         try{
             FileSystem[] fsList = sigar.getFileSystemList();
             this.partitions = new ArrayList<Partition>();
@@ -45,11 +42,11 @@ public class PartitionMonitor implements Monitorable {
             }
         } catch (SigarException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return false;
     }
 }
