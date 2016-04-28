@@ -23,10 +23,11 @@ public class SystemMonitor {
         OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
 
         monitors.put("memory", new MemoryMonitor(hardware.getMemory()));
-        monitors.put("cpu", new CPUMonitor());
+        monitors.put("cpu", new CPUMonitor(hardware.getProcessor(), hardware.getSensors()));
         monitors.put("gpu", new NvidiaGraphicsMonitor());
         monitors.put("os", new OSMonitor());
         monitors.put("partitions", new PartitionMonitor());
+        monitors.put("power", new PowerMonitor());
 
         Iterator<Monitorable> it = monitors.values().iterator();
         while(it.hasNext()) {
