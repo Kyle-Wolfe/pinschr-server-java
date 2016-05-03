@@ -27,7 +27,6 @@ public class SystemMonitor {
         monitors.put("gpu", new NvidiaGraphicsMonitor());
         monitors.put("os", new OSMonitor());
         monitors.put("partitions", new PartitionMonitor());
-        monitors.put("power", new PowerMonitor());
 
         Iterator<Monitorable> it = monitors.values().iterator();
         while(it.hasNext()) {
