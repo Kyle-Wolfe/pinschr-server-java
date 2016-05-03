@@ -1,46 +1,23 @@
 package com.westonbelk;
 
 import com.google.gson.annotations.Expose;
+import oshi.software.os.OSFileStore;
 
 public class Partition {
 
-    @Expose private String mountPoint;
-    @Expose private String deviceName;
-    @Expose private long bytesFree;
-    @Expose private long bytesUsed;
-    @Expose private long readBytes;
-    @Expose private long writeBytes;
+    @Expose private String description;
+    @Expose private String name;
+    @Expose private long free;
+    @Expose private long used;
+    @Expose private long reads;
+    @Expose private long writes;
 
-    public Partition() {
-        this.mountPoint = "";
-        this.deviceName = "";
-        this.bytesFree = 0;
-        this.bytesUsed = 0;
-        this.readBytes = 0;
-        this.writeBytes = 0;
-    }
-
-    public void setMountPoint(String mountPoint) {
-        this.mountPoint = mountPoint;
-    }
-
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName;
-    }
-
-    public void setBytesFree(long bytesFree) {
-        this.bytesFree = bytesFree;
-    }
-
-    public void setBytesUsed(long bytesUsed) {
-        this.bytesUsed = bytesUsed;
-    }
-
-    public void setReadBytes(long readBytes) {
-        this.readBytes = readBytes;
-    }
-
-    public void setWriteBytes(long writeBytes) {
-        this.writeBytes = writeBytes;
+    public Partition(OSFileStore f) {
+        this.description = f.getDescription();
+        this.name = f.getName();
+        this.free = f.getUsableSpace();
+        this.used = f.getTotalSpace()-f.getUsableSpace();
+        this.reads = -1;
+        this.writes = -1;
     }
 }
