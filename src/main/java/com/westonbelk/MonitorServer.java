@@ -10,10 +10,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 
 public class MonitorServer extends WebSocketServer {
 
-    SystemMonitor system;
+    private SystemMonitor system;
 
     public static void main(String[] args) throws InterruptedException, IOException {
         WebSocketImpl.DEBUG = false;
@@ -28,6 +29,14 @@ public class MonitorServer extends WebSocketServer {
             if(in.equals("stop")) {
                 server.stop();
                 break;
+            }
+            else if(in.equals("print")) {
+                System.out.println("["+new Date().toString()+"] Printing current Json");
+                server.getSystem().printPretty();
+            }
+            else if(in.equals("update")) {
+                server.getSystem().update();
+                System.out.println("["+new Date().toString()+"] Updated");
             }
         }
     }
@@ -61,6 +70,10 @@ public class MonitorServer extends WebSocketServer {
         if(conn != null) {
 
         }
+    }
+
+    public SystemMonitor getSystem() {
+        return this.system;
     }
 
 }
