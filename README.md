@@ -1,7 +1,7 @@
 #Remote System Monitor
 
-This is cross-platform remote system monitor that is being built as a part of my senior capstone project.
+This is the server for a cross-platform remote system monitor. It is written in Java and uses websockets as the communication protocol.
 
-It is written in Java and licensed under the MIT license.
+It is licensed under the MIT license.
 
-Firstly, a local system monitor is being written, then the server and client sides will be implemented. 
+The web frontend can be found at https://github.com/westonbelk/capstone-web-client
