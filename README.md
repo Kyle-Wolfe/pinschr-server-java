@@ -5,3 +5,6 @@ This is the server for a cross-platform remote system monitor. It is written in 
 It is licensed under the MIT license.
 
 The web frontend can be found at https://github.com/westonbelk/capstone-web-client
+
+
+![Screenshot](/pinschr.png?raw=true)
