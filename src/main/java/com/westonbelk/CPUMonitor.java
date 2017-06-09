@@ -17,6 +17,7 @@ public class CPUMonitor implements Monitorable {
     @Expose private double temperature;
     @Expose private double voltage;
     @Expose private int[] fanSpeed;
+    @Expose private double load;
 
     public CPUMonitor(CentralProcessor cpu, Sensors sensors) {
         this.cpu = cpu;
@@ -31,6 +32,7 @@ public class CPUMonitor implements Monitorable {
         this.name = cpu.getName();
         this.freq = cpu.getVendorFreq()/1000000000.0;
         this.uptime = cpu.getSystemUptime();
+        this.load = cpu.getSystemCpuLoad();
 
         this.temperature = sensors.getCpuTemperature();
         if(this.temperature == 0) this.temperature = -1;
